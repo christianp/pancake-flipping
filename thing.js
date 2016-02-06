@@ -27,8 +27,10 @@ var stack_element = document.getElementById('stack');
 var prefix_element = stack_element.querySelector('.prefix');
 var rest_element = stack_element.querySelector('.rest');
 
-function Stack() {
+function Stack(order) {
 	var s = this;
+
+	this.order = order;
 	this.num_moves = 0;
 	this.stack = [];
 	this.flipping = false;
@@ -38,9 +40,8 @@ function Stack() {
 	prefix_element.innerHTML = '';
 	rest_element.innerHTML = '';
 	
-	var order = deal(8);
-	for(var i=0;i<order.length;i++) {
-		this.add_pancake(order[i]+1);
+	for(var i=order.length-1;i>=0;i--) {
+		this.add_pancake(this.order[i]+1);
 	}
 
 
@@ -128,16 +129,9 @@ Stack.prototype = {
 }
 
 var stack;
-prefix_element.addEventListener('animationend',function(e){
-	if(e.animationName!='flip') {
-		return;
-	}
-	stack.endFlip(e)
-});
-function reset() {
-	stack = new Stack();
-}
-reset();
+var num_pancakes = 8;
+var first_order;
+
 document.getElementById('reset').addEventListener('click',reset);
 document.getElementById('add-one').addEventListener('click',function() {
 	stack.add_pancake();
@@ -145,3 +139,31 @@ document.getElementById('add-one').addEventListener('click',function() {
 document.getElementById('remove-one').addEventListener('click',function() {
 	stack.remove_pancake();
 });
+prefix_element.addEventListener('animationend',function(e){
+	if(e.animationName!='flip') {
+		return;
+	}
+	stack.endFlip(e)
+});
+
+if(location.search) {
+	var bits = location.search.slice(1).split('&');
+	var obj = {}
+	for(var i=0;i<bits.length;i++) {
+		var d = bits[i].split('=');
+		obj[decodeURIComponent(d[0])] = decodeURIComponent(d[1]);
+	}
+
+	if('num_pancakes' in obj) {
+		num_pancakes = parseInt(obj['num_pancakes']);
+	}
+	if('order' in obj) {
+		first_order = obj['order'].split(',').map(function(v){return parseInt(v)-1});
+	}
+}
+
+function reset() {
+	var order = first_order || deal(num_pancakes);
+	stack = new Stack(order);
+}
+reset();
