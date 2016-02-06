@@ -1,3 +1,6 @@
+body {
+	overflow: hidden;
+}
 #stack {
 	width: 16rem;
 	margin: 0 auto;
