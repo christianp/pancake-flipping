@@ -1,0 +1,69 @@
+#stack {
+	width: 16rem;
+	margin: 0 auto;
+}
+#stack .bit {
+	margin-top: 1em;
+}
+#stack ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.prefix.flip, .prefix.flip .number {
+	animation: flip 0.7s ease-in-out;
+}
+.flipping .pancake {
+	cursor: default;
+}
+.pancake {
+	cursor: pointer;
+	width: 10rem;
+	height: 4rem;
+	line-height: 4rem;
+	font-size: 2em;
+	text-align: center;
+	margin: 0;
+	position: relative;
+}
+.pancake img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+.pancake .number {
+	display: inline-block;
+}
+
+.pancake.toflip {
+	color: white;
+	font-weight: bold;
+	background-opacity: 0.5;
+}
+
+@keyframes flip {
+	0% {
+		transform: rotate(0turn);
+	}
+	100% {
+		transform: rotate(0.5turn);
+	}
+}
+
+#stack button {
+	width: 100%;
+}
+#stack .controls, #stack .stack {
+	float: left;
+}
+#stack .stack {
+	width: 10rem;
+	min-height: 1px;
+}
+#stack .controls {
+	width: 5rem;
+	margin-left: 1rem;
+}
