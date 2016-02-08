@@ -160,6 +160,10 @@ if(location.search) {
 	if('order' in obj) {
 		first_order = obj['order'].split(',').map(function(v){return parseInt(v)-1});
 	}
+	if('num_pancakes' in obj || 'order' in obj) {
+		document.getElementById('add-one').style.display = 'none';
+		document.getElementById('remove-one').style.display = 'none';
+	}
 }
 
 function reset() {
