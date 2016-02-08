@@ -60,8 +60,7 @@ Stack.prototype = {
 		var img = make_element('img',{src:'pancake.png'});
 		e.appendChild(img);
 		var filter = 'brightness('+1/Math.pow(n,1/3)+')';
-		img.style['filter'] = filter;
-		img.style['-webkit-filter'] = filter;
+		e.style['width'] = (1-0.6/Math.sqrt(n))*10+'rem';
 		e.appendChild(make_element('span',{class:'number'},n));
 		e.addEventListener('mouseover',function() {
 			if(s.flipping) {
